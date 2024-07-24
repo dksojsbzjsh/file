@@ -1,127 +1,194 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>组织文件下载</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap">
+    <title>Agreement Form</title>
     <style>
+        /* 引入需要的字体 */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f5f5f5;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            padding: 20px;
-        }
-
-        h1 {
-            color: #3c4043;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        .input-container {
-            display: flex;
+            min-height: 100vh;
             flex-direction: column;
+            background: #23242a;
+        }
+
+        .box {
+            position: relative;
+            width: 380px;
+            height: auto;
+            background: #1c1c1c;
+            border-radius: 8px;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        h2 {
+            color: #45f3ff;
+            font-weight: 500;
+            text-align: center;
             margin-bottom: 20px;
         }
 
-        input[type="text"] {
+        .question {
+            margin-bottom: 15px;
+        }
+
+        .inputBox {
+            position: relative;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .inputBox input[type="text"] {
+            position: relative;
+            width: 100%;
             padding: 10px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            margin-bottom: 10px;
-            font-size: 16px;
+            background: transparent;
+            outline: none;
+            box-shadow: none;
+            border: 1px solid #45f3ff;
+            color: #8f8f8f;
+            font-size: 1em;
+            letter-spacing: 0.05em;
+            transition: 0.5s;
+        }
+
+        .agreement {
+            margin-bottom: 20px;
+        }
+
+        .agreement input[type="radio"] {
+            display: none;
+        }
+
+        .agreement label {
+            position: relative;
+            padding-left: 25px;
+            font-size: 1em;
+            color: #8f8f8f;
+            cursor: pointer;
+        }
+
+        .agreement label:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #45f3ff;
+            border-radius: 50%;
+            background: transparent;
+        }
+
+        .agreement input[type="radio"]:checked + label:before {
+            background: #45f3ff;
         }
 
         button {
-            padding: 10px 20px;
-            border-radius: 4px;
             border: none;
-            background-color: #6200ee;
-            color: white;
-            font-size: 16px;
+            outline: none;
+            padding: 11px 25px;
+            background: #45f3ff;
             cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #3700b3;
-        }
-
-        .file-list {
-            width: 100%;
-            max-width: 600px;
-            background-color: white;
             border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            padding: 20px;
+            font-weight: 600;
+            width: 100px;
+            margin-top: 10px;
         }
 
-        .file-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
+        button:active {
+            opacity: 0.8;
         }
 
-        .file-item p {
-            margin: 0;
-            font-size: 16px;
-            color: #3c4043;
+        .next-question {
+            margin-top: 20px;
         }
 
-        .file-item button {
-            background-color: #4caf50;
-            padding: 5px 15px;
-            font-size: 14px;
-        }
-
-        .file-item button:hover {
-            background-color: #388e3c;
+        @media (max-width: 400px) {
+            .box {
+                width: 100%;
+                height: auto;
+                padding: 10px;
+            }
         }
     </style>
 </head>
+
 <body>
-    <h1>组织文件下载</h1>
-    <div class="input-container">
-        <input type="text" id="password" placeholder="请输入蓝奏云密码">
-        <button onclick="fetchFiles()">获取文件列表</button>
+    <div class="box">
+        <h2>Join Our Organization</h2>
+        <div id="question1" class="question">
+            <p>1. I agree not to disclose the organization's information.</p>
+            <div class="agreement">
+                <input type="radio" id="agree1" name="question1" value="agree">
+                <label for="agree1">Agree</label>
+            </div>
+            <button id="next1" class="next-question" disabled>Next</button>
+        </div>
+        <div id="question2" class="question" style="display:none;">
+            <p>2. I agree not to publicly share the organization's documents.</p>
+            <div class="agreement">
+                <input type="radio" id="agree2" name="question2" value="agree">
+                <label for="agree2">Agree</label>
+            </div>
+            <button id="next2" class="next-question" disabled>Next</button>
+        </div>
+        <div id="question3" class="question" style="display:none;">
+            <p>3. I agree not to disclose the identities of others.</p>
+            <div class="agreement">
+                <input type="radio" id="agree3" name="question3" value="agree">
+                <label for="agree3">Agree</label>
+            </div>
+            <button id="join">Join Now</button>
+        </div>
     </div>
-    <div id="file-list" class="file-list"></div>
 
     <script>
-        function fetchFiles() {
-            const link = "https://wwt.lanzouq.com/b04l4jdpc";
-            const password = document.getElementById('password').value;
-            const xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    const files = JSON.parse(xhr.responseText);
-                    const fileList = document.getElementById('file-list');
-                    fileList.innerHTML = '';
-                    files.forEach(file => {
-                        const item = document.createElement('div');
-                        item.className = 'file-item';
-                        item.innerHTML = `
-                            <p>${file.name}</p>
-                            <button onclick="downloadFile('${file.url}')">下载</button>
-                        `;
-                        fileList.appendChild(item);
-                    });
-                } else if (xhr.readyState === 4 && xhr.status !== 200) {
-                    document.getElementById('file-list').innerHTML = '无法获取文件列表，请检查密码或链接';
-                }
-            };
-            xhr.open('GET', link + "?key=" + password, true);
-            xhr.send();
-        }
+        document.getElementById('agree1').addEventListener('change', function() {
+            if (this.checked) {
+                document.getElementById('next1').disabled = false;
+            }
+        });
 
-        function downloadFile(fileUrl) {
-            window.open(fileUrl, '_blank');
-        }
+        document.getElementById('next1').addEventListener('click', function() {
+            document.getElementById('question1').style.display = 'none';
+            document.getElementById('question2').style.display = 'block';
+            this.disabled = true;
+        });
+
+        document.getElementById('agree2').addEventListener('change', function() {
+            if (this.checked) {
+                document.getElementById('next2').disabled = false;
+            }
+        });
+
+        document.getElementById('next2').addEventListener('click', function() {
+            document.getElementById('question2').style.display = 'none';
+            document.getElementById('question3').style.display = 'block';
+            this.disabled = true;
+        });
+
+        document.getElementById('agree3').addEventListener('change', function() {
+            if (this.checked') {
+                // Replace with the actual URL of the WeChat group chat invitation page
+                window.location.href = 'https://weixin.qq.com';
+            }
+        });
     </script>
 </body>
+
 </html>
+
